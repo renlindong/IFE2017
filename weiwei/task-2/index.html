@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>任务二：零基础HTML及CSS编码（一）</title>
+    <style media="screen">
+        *{
+            margin:0;
+            padding: 0;
+        }
+        .header{
+            background-color: #352e2e;
+            height: 100px;
+
+        }
+        .header .logo{
+            width:80px;
+            padding-top: 10px;
+            padding-left:5%;
+            float: left;
+        }
+        .header .logo img{
+            width:100%;
+            height:80px;
+
+            border-radius: 50%;
+        }
+        .header .nav{
+            height:100%;
+            float: right;
+            padding-right: 5%;
+        }
+        .nav ul{
+            margin-top:35px;
+            list-style: none;
+        }
+        .nav ul li{
+            padding-left:10px;
+            display: inline-block;
+        }
+        .nav ul li a{
+            line-height: 30px;
+            text-decoration: none;
+        }
+        .base-color{
+            color:#fff;
+        }
+        .diff-color{
+            color:#b9aeae;
+        }
+        .content{
+            background-color: #f3eeee;
+            padding:20px 3%;
+        }
+        .content .article{
+            padding: 40px 20px;
+            margin-bottom: 20px;
+            border:1px solid #ccc;
+            border-bottom: 3px solid #ccc;
+            background-color: #fff;
+        }
+        .content .article .first-title{
+            line-height: 40px;
+        }
+        .content .article .second-title{
+            color:#827b7b;
+            line-height: 50px;
+        }
+        .content .article .article-auth,
+        .content .article .article-time{
+            line-height: 40px;
+            color:#b5b0b0;
+        }
+        .content .article .text{
+            text-indent:2em;
+            line-height: 25px;
+        }
+        .content .article ul{
+            list-style: none;
+        }
+        .content .article ul li{
+            line-height: 25px;
+        }
+        .content .article .img-box{
+            width:180px;
+            height:150px;
+            padding:0 5px;
+            border:1px solid #ccc;
+            text-align: center;
+            margin-left:50px;
+            margin-top:20px;
+        }
+        .content .article .img-box span{
+            line-height: 40px;
+        }
+        .content .article .img-box img{
+            width:120px;
+            hegith:110px;
+        }
+        .content .article .top{
+            padding-left: 40px;
+            margin-bottom: 20px;
+        }
+        .content .article .top li{
+            line-height: 25px;
+        }
+        .content .article .table{
+            width:100%;
+            text-align: left;
+            border-top:1px solid #ccc;
+            border-left:1px solid #ccc;
+        }
+        .content .article .table th{
+            padding: 5px;
+            border-bottom: 1px solid #ccc;
+            border-right: 1px solid #ccc;
+        }
+        .content .article .table .title{
+            background-color: #000;
+            color:#fff;
+        }
+        .content .article .table .end{
+            background-color: #ccc;
+        }
+        .content .sidebar .info-form{
+
+            width:100%;
+        }
+        .content .sidebar .first-title{
+            border-left: 4px solid #ccc;
+            padding-left: 20px;
+        }
+        .content .sidebar .info-form .info-i{
+
+            margin:0 auto;
+            padding-top:15px;
+        }
+        .content .sidebar .info-form .info-i label{
+            width:40%;
+            text-align: right;
+            display: inline-block;
+        }
+        .content .sidebar .info-form .info-i input[type='text']{
+            width:20%;
+            height:30px;
+        }
+        .content .sidebar .info-form .info-i .fl-right{
+            margin-left: 2%;
+
+        }
+        .content .sidebar .info-form .info-i p{
+            padding-left:42%;
+            line-height: 25px;
+        }
+        .content .sidebar .info-form .submit{
+            width:100%;
+            text-align: center;
+            margin-top: 30px;
+            font-size: 1em;
+            padding: 10px 0;
+            color:#fff;
+            background-color: #1e67c1;
+            border: none;
+            border-radius: 5px;
+        }
+        .footer{
+            color:#fff;
+            background-color:#131111;
+            height:70px;
+            text-align: center;
+        }
+        .footer span{
+            line-height: 70px;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="logo">
+            <img src="./img.png" alt="图片加载失败">
+        </div>
+        <div class="nav">
+            <ul>
+                <li>
+                    <a href="#" class='base-color'>导航链接一</a>
+                </li>
+                <li>
+                    <a href="#" class='base-color'>导航链接二</a>
+                </li>
+                <li>
+                    <a href="#" class='base-color'>导航链接三</a>
+                </li>
+                <li>
+                    <a href="#" class='diff-color'>导航链接四</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="content">
+        <div class="article">
+            <h1 class='first-title'>文章一级标题</h1>
+            <h2 class='second-title'>文章二级标题</h2>
+            <span class='article-auth'>文章作者</span>
+            <span class='article-time'>文章发表时间</span>
+            <p class='text'>这是一个很长的段落，这是一个很长的段落，这是一个很长的段落，这是一个很长的段落，这是一个很长的段落，这是一个很长的段落，这是一个很长的段落，
+                换行了<br/>这是一个很长的段落，这是一个很长的段落，这是一个很长的段落，这是一个很长的段落，这是一个很长的段落，这是一个很长的段落，这是一个很长的段落, 这是一个很长的段落，这是一个很长的段落，这是一个很长的段落，这是一个很长的段落，这是一个很长的段落，这是一个很长的段落，这是一个很长的段落,
+                <a href="http://ife.baidu.com/">这里有一个链接到http://ife.baidu.com/</a>这是一个很长的段落，这是一个很长的段落，这是一个很长的段落, 这是一个很长的段落，这是一个很长的段落，这是一个很长的段落,这是一个很长的段落，这是一个很长的段落，这是一个很长的段落,
+            </p>
+            <img src="./img.png" alt="图片加载失败">
+            <p class='text'>这是一个很长的段落，这是一个很长的段落，这是一个很长的段落，这是一个很长的段落，这是一个很长的段落，这是一个很长的段落，这是一个很长的段落，
+                <br/>换行了<br/> 这是一个很长的段落，这是一个很长的段落，这是一个很长的段落，这是一个很长的段落，这是一个很长的段落，这是一个很长的段落，这是一个很长的段落, 这是一个很长的段落，这是一个很长的段落，这是一个很长的段落，这是一个很长的段落，这是一个很长的段落，这是一个很长的段落，这是一个很长的段落,
+                <a href="http://ife.baidu.com/">这里有一个链接到http://ife.baidu.com/</a>这是一个很长的段落，这是一个很长的段落，这是一个很长的段落, 这是一个很长的段落，这是一个很长的段落，这是一个很长的段落,这是一个很长的段落，这是一个很长的段落，这是一个很长的段落,
+            </p>
+        </div>
+        <div class="article">
+            <h1 class='first-title'>另一篇文章的一级标题</h1>
+            <h2 class='second-title'>文章的二级标题</h2>
+            <span class='article-auth'>文章作者</span>
+            <span class='article-time'>文章发表时间</span>
+            <p class="text">这是一个很长的段落，这是一个很长的段落，这是一个很长的段落，这是一个很长的段落，这是一个很长的段落，这是一个很长的段落，这是一个很长的段落，
+                <br/>换行了<br/> 这是一个很长的段落，这是一个很长的段落，这是一个很长的段落，这是一个很长的段落，这是一个很长的段落，这是一个很长的段落，这是一个很长的段落, 这是一个很长的段落，这是一个很长的段落，这是一个很长的段落，这是一个很长的段落，这是一个很长的段落，这是一个很长的段落，这是一个很长的段落,
+                <a href="http://ife.baidu.com/">这里有一个链接到http://ife.baidu.com/</a>这是一个很长的段落，这是一个很长的段落，这是一个很长的段落, 这是一个很长的段落，这是一个很长的段落，这是一个很长的段落,这是一个很长的段落，这是一个很长的段落，这是一个很长的段落,
+            </p>
+            <img src="./img.png" alt="图片加载失败">
+            <ul class='list'>
+                <li>项目列表一</li>
+                <li>项目列表二</li>
+                <li>项目列表三</li>
+            </ul>
+        </div>
+        <div class='article'>
+            <h2>图片</h2>
+            <div class="img-box">
+                <span>好看的图片</span>
+                <img src="./img.png" alt="图片加载失败">
+            </div>
+            <div class="img-box">
+                <span>好看的图片</span>
+                <img src="./img.png" alt="图片加载失败">
+            </div>
+            <div class="img-box">
+                <span>好看的图片</span>
+                <img src="./img.png" alt="图片加载失败">
+            </div>
+            <div class="img-box">
+                <span>好看的图片</span>
+                <img src="./img.png" alt="图片加载失败">
+            </div>
+            <div class="img-box">
+                <span>好看的图片</span>
+                <img src="./img.png" alt="图片加载失败">
+            </div>
+            <div class="img-box">
+                <span>好看的图片</span>
+                <img src="./img.png" alt="图片加载失败">
+            </div>
+            <div class="img-box">
+                <span>好看的图片</span>
+                <img src="./img.png" alt="图片加载失败">
+            </div>
+
+        </div>
+        <div class="article">
+            <h1 class='first-title'>最后一篇文章一级标题</h1>
+            <h2 class='second-title'>文章二级标题</h2>
+            <span class='article-auth'>文章作者</span>
+            <span class='article-time'>文章发表时间</span>
+            <ol class='top'>
+                <li>排名1</li>
+                <li>排名2</li>
+                <li>排名3</li>
+            </ol>
+            <p>下面是一个表格，给表格加border='1'，方便看</p>
+            <table class='table' border="0" cellspacing='0' cellpadding='0'>
+                <tr>
+                    <th>表头</th>
+                    <th>表头</th>
+                    <th>表头</th>
+                </tr>
+                <tr>
+                    <th>表头单元格</th>
+                    <th>表头单元格</th>
+                    <th><a href="#">操作</a></th>
+                </tr>
+                <tr>
+                    <th>表头单元格</th>
+                    <th>表头单元格</th>
+                    <th><a href="#">操作</a></th>
+                </tr>
+                <tr>
+                    <th>表头单元格</th>
+                    <th>表头单元格</th>
+                    <th><a href="#">操作</a></th>
+                </tr>
+                <tr class="end">
+                    <th>总计</th>
+                    <th colspan='2'>1000</th>
+                </tr>
+            </table>
+        </div>
+        <div class="article sidebar">
+            <h1 class='first-title'>这里以后是一个侧栏，这是侧栏的标题</h1>
+            <form class='info-form'>
+                <div class="info-i">
+                    <label>请输入邮箱地址</label>
+                    <input class='fl-right' type="text" name="" placeholder="这是一个文本输入框">
+                    <p>邮箱地址按格式输入</p>
+                </div>
+                <div class="info-i">
+                    <label>请输入密码</label>
+                    <input class='fl-right' type="text" placeholder='这是一个文本输入框'>
+                </div>
+                <div class="info-i">
+                    <label>请重复输入密码</label>
+                    <input class='fl-right' type="text" placeholder="这是一个文本输入框">
+                    <p>密码请为6-16位英文数字</p>
+                </div>
+                <div class="info-i">
+                    <label>性别</label>
+                    <input class='fl-right' type="radio" name='sex'>男
+                    <input class='fl-right' type="radio" name='sex'>女
+                </div>
+                <div class="info-i">
+                    <label>城市</label>
+                    <select class='fl-right' class="" name="">
+                      <option>北京</option>
+                      <option>上海</option>
+                    </select>
+                </div>
+                <div class="info-i">
+                    <label>爱好</label>
+                    <input class='fl-right' type="checkbox" name="bobby" value="">运动
+                    <input class='fl-right' type="checkbox" name="bobby" value="">艺术
+                    <input class='fl-right' type="checkbox" name="hobby" value="">科学
+                </div>
+                <div class="info-i">
+                    <label style='display:block;float:left'>个人描述</label>
+                    <textarea class='fl-right' rows="10" cols="100" name="name" placeholder="这是个多行输入框"></textarea>
+
+                </div>
+                <button class='submit' type="submit" name="button">确认提交</button>
+            </form>
+        </div>
+    </div>
+    <div class="footer">
+        <span>©版权所有</span>
+    </div>
+</body>
+
+</html>
