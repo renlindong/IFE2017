@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>IFE JAVASCRIPT TASK 2</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="css/style.css" rel="stylesheet">
+</head>
+
+<body>
+    <h3>污染城市列表</h3>
+    <ul id='aqi-list'>
+
+    </ul>
+    <script type='text/javascript'>
+        var aqiData = [
+            ["北京", 90],
+            ["上海", 50],
+            ["福州", 10],
+            ["广州", 50],
+            ["成都", 90],
+            ["西安", 100]
+        ];
+        (function () {
+            var list = document.getElementById('aqi-list')
+            var newData = aqiData.filter(function (item) {
+                if (item[1] > 60) {
+                    return item
+                }
+            })
+            newData.sort(function (prev, next) {
+                if (prev[1] - next[1] < 0) {
+                    return 1
+                } else {
+                    return -1
+                }
+            })
+            var newDom = newData.map(function (item, index) {
+                list.appendChild(creatDOM('li', index, item))
+            })
+        })()
+        function creatDOM(type, index, data) {
+            var element = document.createElement(type)
+            element.innerText = '第' + translateNum(index) + '名：' + data[0] + ',' + data[1]
+            return element
+        }
+        function translateNum(number) {
+            //只处理两位数
+            if (number >= 100) {
+                return number
+            }
+            var dict = ['零', '一', '二', '三', '四', '五', '六', '七', '八', '九']
+            number++
+            number += ''
+            var array = number.split('').map(function (item) {
+                return dict[parseInt(item)]
+            })
+            return array[0] + (array.length === 2 ? '十' + array[1] : '')
+        }
+    </script>
+</body>
+
+</html>
