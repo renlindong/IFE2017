@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>IFE JAVASCRIPT TASK3</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="css/style.css" rel="stylesheet">
+</head>
+
+<body>
+    <ul id="source">
+        <li>北京空气质量：<b>90</b></li>
+        <li>上海空气质量：<b>70</b></li>
+        <li>天津空气质量：<b>80</b></li>
+        <li>广州空气质量：<b>50</b></li>
+        <li>深圳空气质量：<b>40</b></li>
+        <li>福州空气质量：<b>32</b></li>
+        <li>成都空气质量：<b>90</b></li>
+    </ul>
+    <ul id="resort">
+        
+    </ul>
+    <button type="" id='sort-btn'>排序</button>
+    <script type='text/javascript'>
+        function getData() {
+            //获取页面上的数据
+            var source = document.getElementById('source')
+            var data = []
+            for (var key in source.children) {
+                if (source.children[key].nodeType === 1) {
+                    var text = source.children[key].firstChild.data
+                    var city = text.slice(0, text.indexOf('空'))
+                    var number = source.children[key].lastChild.innerText
+                    data.push([city, number])
+                }
+            }
+            return data
+        }
+        function sortAqiData(data) {
+            //对数据排序
+            return data.sort(function (prev, next) {
+                if (prev[1] - next[1] > 0) {
+                    return 1
+                } else {
+                    return -1
+                }
+            })
+        }
+        function render(data) {
+            //渲染列表
+            var list = document.getElementById('resort')
+            data.map(function (item) {
+                var element = document.createElement('li')
+                element.innerText = item[0] + '空气质量：' + item[1]
+                list.appendChild(element)
+            })
+        }
+        function btnHandle() {
+            var data = getData()
+            data = sortAqiData(data)
+            render(data)
+        }
+        function init() {
+            //绑定事件
+            var btn = document.getElementById('sort-btn')
+            btn.addEventListener('click', btnHandle, false)
+        }
+        init()
+    </script>
+</body>
+
+</html>
