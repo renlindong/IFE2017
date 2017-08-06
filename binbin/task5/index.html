@@ -144,6 +144,10 @@
                 alert('请输入纯数字')
                 return false
             }
+            if (parseInt(value) < 10 || parseInt(value) > 100) {
+                alert('数字请限制在10-100之间')
+                return false
+            }
             return parseInt(value)
         }
         init()
