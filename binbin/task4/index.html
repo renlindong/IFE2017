@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>IFE JAVASCRIPT TASK4</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        .red{
+            background-color: red;
+            padding: 5px;
+            color: #fff;
+            font-size: 20px;
+            margin-right: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <input type="" name="" value="" id='input'>
+        <button type="" id='left_join'>左侧入</button>
+        <button type="" id='left_remove'>左侧出</button>
+        <button type="" id='right_join'>右侧入</button>
+        <button type="" id='right_remove'>右侧出</button>
+    </div>
+    <ul id='list'>
+        
+    </ul>
+    <script type='text/javascript'>
+        function init() {
+            var leftJoin = document.getElementById('left_join')
+            var leftRemove = document.getElementById('left_remove')
+            var rightJoin = document.getElementById('right_join')
+            var rightRemove = document.getElementById('right_remove')
+            var ul = document.getElementById('list')
+            leftJoin.addEventListener('click', unshift, false)
+            leftRemove.addEventListener('click', shift, false)
+            rightJoin.addEventListener('click', push, false)
+            rightRemove.addEventListener('click', rightDelete, false)
+            ul.addEventListener('click', function (e) {
+                if (e.target.tagName.toLowerCase() === 'span') {
+                    var element = e.target
+                    ul.removeChild(element)
+                }
+            }, false)
+        }
+        function shift() {
+            //左出
+            var list = document.getElementById('list')
+            if (list.children.length ===0) {
+                return false
+            }
+            alert(list.children[0].innerText)
+            list.removeChild(list.children[0])
+        }
+        function unshift() {
+            //左入
+            var value = getInputValue()
+            var list = document.getElementById('list')
+            if (value.length === 0 || !value) {
+                return false
+            }
+            var element = creatListDom('span', value)
+            if (list.children.length === 0) {
+                list.appendChild(element)
+            } else {
+                var ref = list.children[0]
+                list.insertBefore(element, ref)
+            }
+        }
+        function push() {
+            //右入
+            var value = getInputValue()
+            var list = document.getElementById('list')
+            if (value.length === 0 || !value) {
+                return false
+            }
+            var element = creatListDom('span', value)
+            list.appendChild(element)
+        }
+        function rightDelete(params) {
+            //右出
+            var list = document.getElementById('list')
+            var length = list.children.length
+            if (length === 0) {
+                return false
+            }
+            alert(list.children[length - 1].innerText)
+            list.removeChild(list.children[length - 1])
+        }
+        function getInputValue() {
+            var input = document.getElementById('input')
+            var value = input.value
+            var reg = new RegExp("^[0-9]*$");
+            if (value.length === 0) {
+                alert('请输入')
+                return false
+            }
+            if (!reg.test(value)) {
+                alert('请输入纯数字')
+                return false
+            }
+            return value
+        }
+        function creatListDom(type, value) {
+            var element = document.createElement(type)
+            element.innerText = value
+            element.className = 'red'
+            return element
+        }
+        init()
+    </script>
+</body>
+
+</html>
