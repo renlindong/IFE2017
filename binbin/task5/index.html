@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>IFE JAVASCRIPT TASK5</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        ul{
+            list-style: none;
+            margin: 0 auto;
+        }
+        #list {
+            margin-top: 30px;
+        }
+        #list li{
+            margin-right: 10px;
+            display: inline-block;
+        }
+        .red{
+            width: 15px;
+            background-color: red;
+        }
+    </style>
+</head>
+
+<body>
+    <div>
+        <input type="" name="" value="" id='input'>
+        <button type="" id='left_join'>左侧入</button>
+        <button type="" id='left_remove'>左侧出</button>
+        <button type="" id='right_join'>右侧入</button>
+        <button type="" id='right_remove'>右侧出</button>
+        <button type="" id='sort'>冒泡</button>
+    </div>
+    <ul id='list'>
+    </ul>
+    <script type='text/javascript'>
+        var aqiData = []
+        var jsonData = []
+        function init() {
+            var leftJoin = document.getElementById('left_join')
+            var leftRemove = document.getElementById('left_remove')
+            var rightJoin = document.getElementById('right_join')
+            var rightRemove = document.getElementById('right_remove')
+            var sort = document.getElementById('sort')
+            var ul = document.getElementById('list')
+            leftJoin.addEventListener('click', unshift, false)
+            leftRemove.addEventListener('click', shift, false)
+            rightJoin.addEventListener('click', push, false)
+            rightRemove.addEventListener('click', pop, false)
+            sort.addEventListener('click', bubbleSort, false)
+            ul.addEventListener('click', function (e) {
+                if (e.target.tagName.toLowerCase() === 'span') {
+                    var element = e.target
+                    ul.removeChild(element)
+                }
+            }, false)
+        }
+        function shift() {
+            //左出
+            if (aqiData.length === 0) {
+                return false
+            }
+            aqiData.shift()
+            render(aqiData)
+        }
+        function unshift() {
+            //左入
+            var value = getInputValue()
+            if (!value) {
+                return false
+            }
+            aqiData.unshift(value)
+            render(aqiData)
+        }
+        function push() {
+            //右入
+            var value = getInputValue()
+            if (!value) {
+                return false
+            }
+            aqiData.push(value)
+            render(aqiData)
+        }
+        function pop() {
+            //右出
+            if (aqiData.length === 0) {
+                return false
+            }
+            aqiData.pop()
+            render(aqiData)
+        }
+        function bubbleSort() {
+            jsonData = []
+            var length = aqiData.length
+            for (var outer = length; outer >= 2; outer--) {
+                for (var inner = 0; inner <= outer -1; inner++) {
+                    if (aqiData[inner] > aqiData[inner + 1]) {
+                        swap(aqiData, inner, inner+1)
+                        jsonData.push(JSON.parse(JSON.stringify(aqiData)))
+                    }
+                }
+            }
+            visualSort()
+        }
+        function visualSort() {
+            var i = 0
+            var timer = setInterval(function () {
+                render(jsonData[i])
+                i++
+                if (i === jsonData.length) {
+                    clearInterval(timer)
+                }
+            }, 300)
+        }
+        function swap(array, index1, index2) {
+            var temp = array[index1]
+            array[index1] = array[index2]
+            array[index2] = temp
+        }
+        function render(data) {
+            //渲染数据
+            console.log(data)
+            var list = document.getElementById('list')
+            var html = ''
+            for (var index = 0; index < data.length; index++) {
+                html += creatTemplate(data[index]) 
+            }
+            list.innerHTML = html
+        }
+        function creatTemplate(height) {
+            return "<li class='red' style='height:" + height + "px'" + "></li>"
+        }
+        function getInputValue() {
+            var input = document.getElementById('input')
+            var value = input.value
+            var reg = new RegExp("^[0-9]*$");
+            if (value.length === 0) {
+                alert('请输入')
+                return false
+            }
+            if (!reg.test(value)) {
+                alert('请输入纯数字')
+                return false
+            }
+            return parseInt(value)
+        }
+        init()
+    </script>
+</body>
+
+</html>
