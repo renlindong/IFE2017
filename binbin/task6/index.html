@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>IFE JAVASCRIPT TASK6</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link href="css/style.css" rel="stylesheet">
+        <style>
+            .red{
+                color: #fff;
+                background-color: red;
+                padding: 2px;
+            }
+            ul li{
+                display: inline-block;
+                margin-right: 5px;
+            }
+            .select{
+                color: black;
+            }
+        </style>
+    </head>
+    <body>
+        <div>
+            <textarea rows="10" cols="50" id='text'></textarea>
+            <button type="" id='insert'>插入</button>
+        </div>
+        <div>
+            <input type="" name="" value="" id='input'>
+            <button type="" id='search'>查询</button>
+        </div>
+        <ul id='list'>
+            
+        </ul>
+    <script type='text/javascript'>
+        var dictData = []
+        function init() {
+            var insert = document.getElementById('insert')
+            var search = document.getElementById('search')
+            insert.addEventListener('click', insertData,false)
+            search.addEventListener('click', filterData,false)
+        }
+        function insertData() {
+            var value = getValue('text')
+            if (!value) {
+                return false
+            }
+            //将匹配正则的字符全部替换成空格，再通过split转化成数组
+            dictData.push(value.replace(/[^0-9a-zA-Z\u4e00-\u9fa5]+/g," ").split(' '))
+            render()
+        }
+        function filterData() {
+            var value = getValue('input')
+            var list = document.getElementById('list')
+            if (!value) {
+                return false
+            }
+            render()
+            for (var index = 0; index < dictData.length; index++) {
+                var reg = new RegExp(value, 'g')
+                list.children[index].innerHTML = list.children[index].innerHTML.replace(reg, "<span class='select'>" + value + "</span>")
+            }
+        }
+        function render() {
+            var list = document.getElementById('list')
+            var newHtml = ''
+            for (var index = 0; index < dictData.length; index++) {
+                newHtml += "<li class='red'>" + dictData[index] + "</li>"
+            }
+            list.innerHTML = newHtml
+        }
+        function getValue(id) {
+            var dom = document.getElementById(id)
+            var value = dom.value.trim()
+            if (value.length === 0) {
+                alert('输入不能为空')
+                return false
+            }
+            dom.value = ''
+            return value
+        }
+        init()
+    </script>
+    </body>
+</html>
