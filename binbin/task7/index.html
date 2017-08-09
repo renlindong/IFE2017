@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>IFE JAVASCRIPT TASK7</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link href="css/style.css" rel="stylesheet">
+        <style>
+            .bst{
+                width: 1250px;
+                height: 300px;
+                margin: 0 auto;
+                border: 1px solid #000;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                padding: 2% 1%;
+                background-color: #fff;
+            }
+            .second{
+                width: 580px;
+                height: 100%;
+                border: 1px solid #000;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                padding: 0 1%;
+                background-color: #fff;
+            }
+            .third{
+                width: 260px;
+                height: 80%;
+                border: 1px solid #000;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                padding: 0 1%;
+                background-color: #fff;
+            }
+            .forth{
+                width: 120px;
+                height: 60%;
+                border: 1px solid #000;
+                background-color: #fff;
+            }
+            .action{
+                width: 1250px;
+                margin: 50px auto;
+                text-align: center;
+                background-color: #fff;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="bst" id="root">
+            <div class="second">
+                <div class="third">
+                    <div class="forth">
+                        
+                    </div>
+                    <div class="forth">
+                        
+                    </div>
+                </div>
+                <div class="third">
+                    <div class="forth">
+                        
+                    </div>
+                    <div class="forth">
+                        
+                    </div>
+                </div>
+            </div>
+            <div class="second">
+                <div class="third">
+                    <div class="forth">
+                        
+                    </div>
+                    <div class="forth">
+                        
+                    </div>
+                </div>
+                <div class="third">
+                    <div class="forth">
+                        
+                    </div>
+                    <div class="forth">
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="action">
+            <button type="" id="prevOrder">先序遍历</button>
+            <button type="" id="inOrder">中序遍历</button>
+            <button type="" id="postOrder">后序遍历</button>
+        </div>
+        <script type='text/javascript'>
+            var nodeDom = []
+            var isAnimation = false
+            var root = document.getElementById('root')
+            function init() {
+                var prevOrder = document.getElementById('prevOrder')
+                var inOrder = document.getElementById('inOrder')
+                var postOrder = document.getElementById('postOrder')
+                prevOrder.addEventListener('click', function () {
+                    nodeDom = []
+                    prevOrderFun(root)
+                    render()
+                }, false)
+                inOrder.addEventListener('click', function () {
+                    nodeDom = []
+                    inOrderFun(root)
+                    render()
+                }, false)
+                postOrder.addEventListener('click', function () {
+                    nodeDom = []
+                    postOrderFun(root)
+                    render()
+                }, false)
+            }
+            function prevOrderFun(node) {
+                nodeDom.push(node)
+                if (node.firstElementChild) {
+                    prevOrderFun(node.firstElementChild)
+                }
+                if (node.lastElementChild) {
+                    prevOrderFun(node.lastElementChild)
+                }
+            }
+            function inOrderFun(node) {
+                if (node.firstElementChild) {
+                    inOrderFun(node.firstElementChild)
+                }
+                nodeDom.push(node)
+                if (node.lastElementChild) {
+                    inOrderFun(node.lastElementChild)
+                }
+            }
+            function postOrderFun(node) {
+                if (node.firstElementChild) {
+                    postOrderFun(node.firstElementChild)
+                } 
+                if (node.lastElementChild) {
+                    postOrderFun(node.lastElementChild)
+                }
+                nodeDom.push(node)
+            }
+            function render() {
+                console.log(nodeDom)
+                if (isAnimation) {
+                    alert('正在遍历')
+                    return false
+                }
+                isAnimation = true
+                var i = 0
+                var timer = setInterval(function () {
+                    if (i > 0) {
+                        nodeDom[i - 1].style.backgroundColor = '#fff'
+                    }
+                    if (i >= nodeDom.length ) {
+                        clearInterval(timer)
+                        nodeDom[nodeDom.length - 1].style.backgroundColor = '#fff'
+                        isAnimation = false
+                    } else {
+                        nodeDom[i].style.backgroundColor = 'red'
+                    }
+                    i++
+                }, 500) 
+            }
+            init()
+        </script>
+    </body>
+</html>
