@@ -158,12 +158,11 @@
                     if (i > 0) {
                         nodeDom[i - 1].style.backgroundColor = '#fff'
                     }
-                    if (i >= nodeDom.length ) {
-                        clearInterval(timer)
-                        nodeDom[nodeDom.length - 1].style.backgroundColor = '#fff'
-                        isAnimation = false
-                    } else {
+                    if (nodeDom[i]) {
                         nodeDom[i].style.backgroundColor = 'red'
+                    } else {
+                        clearInterval(timer)
+                        isAnimation = false
                     }
                     i++
                 }, 500) 
