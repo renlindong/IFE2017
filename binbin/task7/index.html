@@ -14,32 +14,33 @@
                 display: flex;
                 justify-content: space-between;
                 align-items: center;
-                padding: 2% 1%;
+                align-content: center;
+                padding: 2%;
                 background-color: #fff;
             }
             .second{
-                width: 580px;
-                height: 100%;
-                border: 1px solid #000;
-                display: flex;
-                justify-content: space-between;
-                align-items: center;
-                padding: 0 1%;
-                background-color: #fff;
-            }
-            .third{
-                width: 260px;
+                width: 45%;
                 height: 80%;
                 border: 1px solid #000;
                 display: flex;
                 justify-content: space-between;
                 align-items: center;
-                padding: 0 1%;
+                padding: 2%;
+                background-color: #fff;
+            }
+            .third{
+                width: 45%;
+                height: 80%;
+                border: 1px solid #000;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                padding: 2%;
                 background-color: #fff;
             }
             .forth{
-                width: 120px;
-                height: 60%;
+                width: 45%;
+                height: 80%;
                 border: 1px solid #000;
                 background-color: #fff;
             }
@@ -147,7 +148,6 @@
                 nodeDom.push(node)
             }
             function render() {
-                console.log(nodeDom)
                 if (isAnimation) {
                     alert('正在遍历')
                     return false
