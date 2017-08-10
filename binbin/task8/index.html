@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>IFE JAVASCRIPT TASK8</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <style>
+            .bst{
+                width: 1200px;
+                height: 200px;
+                display: flex;
+            }
+            .node{
+                border: 1px solid #000;
+                display: flex;
+                margin: 0 5px;
+                padding: 10px;
+                background-color: #fff;
+            }
+            
+        </style>
+    </head>
+    <body>
+        <div class="bst">
+            <div class="node" id="tree">
+                喜欢的东西
+                <div class="node">
+                    游戏
+                    <div class="node">
+                        dnf
+                    </div>
+                    <div class="node">
+                        lol
+                    </div>
+                    <div class="node">
+                        h1z1
+                    </div>
+                </div>
+                <div class="node">
+                    电影
+                    <div class="node">
+                        你的名字
+                    </div>
+                </div>
+                <div class="node">
+                    音乐
+                    <div class="node">
+                        趁早
+                    </div>
+                    <div class="node">
+                        你还要我怎样
+                    </div>
+                    <div class="node">
+                        今天
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div>
+            <input type="" name="" value="" id="search">
+            <button type="" id="prevOrder">先序查询</button>
+            <button type="" id="postOrder">后序查询</button>
+        </div>
+        <script type='text/javascript'>
+            var nodeDom = []
+            var isFirst = true
+            var tree = document.getElementById('tree')
+            var isAnimation = false
+            function init() {
+                var prevOrder = document.getElementById('prevOrder')
+                var postOrder = document.getElementById('postOrder')
+                prevOrder.addEventListener('click', function () {
+                    nodeDom = []
+                    prevOrderFun(tree)
+                    render()
+                }, false)
+                postOrder.addEventListener('click', function () {
+                    nodeDom = []
+                    postOrderFun(tree)
+                    render()
+                }, false)
+            }
+            function prevOrderFun(node) {
+                nodeDom.push(node)
+                for (var index = 0; index < node.childElementCount; index++) {
+                    prevOrderFun(node.children[index])
+                }
+            }
+            function postOrderFun(node) {
+                for (var index = 0; index < node.childElementCount; index++) {
+                    postOrderFun(node.children[index])
+                }
+                nodeDom.push(node)
+            }
+            function resetCSSS() {
+                for (var index = 0; index < nodeDom.length; index++) {
+                    nodeDom[index].style.backgroundColor = '#fff'
+                }
+            }
+            function render() {
+                var search = document.getElementById('search').value.trim()
+                if (isAnimation) {
+                    alert('正在遍历中')
+                    return false
+                }
+                if (!isFirst) {
+                    resetCSSS()
+                }
+                var i = 0
+                var timer = setInterval(function () {
+                    if (i > 0) {
+                        nodeDom[i-1].style.backgroundColor = '#fff'
+                    }
+                    if (nodeDom[i]) {
+                        nodeDom[i].style.backgroundColor = 'red'
+                        if (nodeDom[i].childNodes[0].nodeValue.search(search) != -1) {
+                            clearInterval(timer)
+                            isAnimation = false
+                            isFirst = false
+                        }
+                    } else {
+                        clearInterval(timer)
+                        isAnimation = false
+                    }
+                    i++
+                }, 500)
+            }
+
+            init()
+        </script>
+    </body>
+</html>
