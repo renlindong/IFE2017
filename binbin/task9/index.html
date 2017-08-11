@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>IFE JAVASCRIPT TASK8</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <style>
+            .bst{
+                width: 1200px;
+                height: 200px;
+                display: flex;
+            }
+            .node{
+                border: 1px solid #000;
+                display: flex;
+                margin: 0 5px;
+                padding: 10px;
+                background-color: #fff;
+            }
+            
+        </style>
+    </head>
+    <body>
+        <div class="bst">
+            <div class="node" id="tree">
+                喜欢的东西
+                <div class="node">
+                    游戏
+                    <div class="node">
+                        dnf
+                    </div>
+                    <div class="node">
+                        lol
+                    </div>
+                    <div class="node">
+                        h1z1
+                    </div>
+                </div>
+                <div class="node">
+                    电影
+                    <div class="node">
+                        你的名字
+                    </div>
+                </div>
+                <div class="node">
+                    音乐
+                    <div class="node">
+                        趁早
+                    </div>
+                    <div class="node">
+                        你还要我怎样
+                    </div>
+                    <div class="node">
+                        今天
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div>
+            <input type="" name="" value="" id="search">
+            <button type="" id="prevOrder">先序查询</button>
+            <button type="" id="postOrder">后序查询</button>
+            <button type="" id="delete">删除</button>
+        </div>
+        <div>
+            <input type="" name="" value="" id="text">
+            <button type="" id="add">添加</button>
+        </div>
+        <script type='text/javascript'>
+            var nodeDom = []
+            var selectNode = []
+            var tree = document.getElementById('tree')
+            var isAnimation = false
+            function init() {
+                var prevOrder = document.getElementById('prevOrder')
+                var postOrder = document.getElementById('postOrder')
+                var deleteNode = document.getElementById('delete')
+                var addNode = document.getElementById('add')
+                prevOrder.addEventListener('click', function () {
+                    nodeDom = []
+                    prevOrderFun(tree, nodeDom)
+                    if (selectNode[0]) {
+                        selectNode[0].style.backgroundColor = '#fff'
+                    }
+                    render()
+                }, false)
+                postOrder.addEventListener('click', function () {
+                    nodeDom = []
+                    postOrderFun(tree)
+                    if (selectNode[0]) {
+                        selectNode[0].style.backgroundColor = '#fff'
+                    }
+                    render()
+                }, false)
+
+                //执行一次先序遍历，避免nodeDom没有数据
+                prevOrderFun(tree, nodeDom)
+                tree.addEventListener('click', function (e) {
+                    if (e.target.tagName.toLowerCase() === 'div') {
+                        if (selectNode[0]) {
+                            selectNode[0].style.backgroundColor = '#fff'
+                        }
+                        selectNode = []
+                        prevOrderFun(e.target, selectNode)
+                        e.target.style.backgroundColor = 'red'
+                    }
+                }, false)
+                deleteNode.addEventListener('click', function () {
+                    if (selectNode.length === 0) {
+                        alert('还没有选中node节点')
+                        return false
+                    }
+                    var parent = selectNode[0].parentElement
+                    parent.removeChild(selectNode[0])
+                    selectNode = []
+                }, false)
+                addNode.addEventListener('click', function () {
+                    if (selectNode.length === 0) {
+                        alert('还没有选中node节点')
+                        return false
+                    }
+                    var text = document.getElementById('text').value.trim()
+                    if (!text) {
+                        alert('没有输入任何内容')
+                        return false
+                    }
+                    var element = document.createElement('div')
+                    element.className = 'node'
+                    element.innerText = text
+                    selectNode[0].appendChild(element)
+                    prevOrderFun(tree, nodeDom)
+                }, false)
+            }
+            function prevOrderFun(node, array) {
+                array.push(node)
+                for (var index = 0; index < node.childElementCount; index++) {
+                    prevOrderFun(node.children[index], array)
+                }
+            }
+            function postOrderFun(node) {
+                for (var index = 0; index < node.childElementCount; index++) {
+                    postOrderFun(node.children[index])
+                }
+                nodeDom.push(node)
+            }
+            function render() {
+                var search = document.getElementById('search').value.trim()
+                if (isAnimation) {
+                    alert('正在遍历中')
+                    return false
+                }
+                var i = 0
+                var timer = setInterval(function () {
+                    if (i > 0) {
+                        nodeDom[i-1].style.backgroundColor = '#fff'
+                    }
+                    if (nodeDom[i]) {
+                        nodeDom[i].style.backgroundColor = 'red'
+                        if (nodeDom[i].childNodes[0].nodeValue.search(search) != -1) {
+                            //找到查询的节点后，初始化selectNode，运行selectNodeFun函数
+                            selectNode = []
+                            prevOrderFun(nodeDom[i], selectNode)
+                            clearInterval(timer)
+                            isAnimation = false
+                            isFirst = false
+                        }
+                    } else {
+                        clearInterval(timer)
+                        isAnimation = false
+                    }
+                    i++
+                }, 500)
+            }
+            init()
+        </script>
+    </body>
+</html>
