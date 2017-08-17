@@ -1,0 +1,50 @@
+.form-item{
+    display: flex;
+    align-items: center;
+    height: 40px;
+}
+input{
+    border: none;
+    height: 30px;
+    font-size: 20px;
+    outline: none;
+    width: 100%;
+}
+.input{
+    width: 300px;
+    height: 30px;
+    padding: 5px 10px;
+    border: 1px solid #000;
+    border-radius: 5px;
+    margin: 0 20px;
+}
+.input .tip{
+    display: block;
+    margin-left: -10px; 
+    margin-top: 10px;
+}
+.btn{
+    height: 40px;
+    background-color: blue;
+    padding: 0 10px;
+    color: #fff;
+    border: 0;
+    border-radius: 5px;
+    outline: none;
+}
+.btn:hover{
+    background-color: black;
+}
+
+.green-border{
+    border: 1px solid greenyellow;
+}
+.green{
+    color: greenyellow;
+}
+.red-border{
+    border: 1px solid red;
+}
+.red{
+    color: red;
+}
