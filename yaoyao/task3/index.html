@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="./css/style.css">
+    <title>表单联动</title>
+</head>
+<body>
+    <div class="main">
+        <input type="radio" name="person" id="isStudent" checked="checked">在校生
+        <input type="radio" name="person" id="isSocial">非在校生
+        <div class="hidden" id='student'>
+            <label for="">学校</label>
+            <select name="" id="city">
+            </select>
+            <select name="" id="university">
+            </select>
+        </div>
+        <div class="hidden" id='social'>
+            <label for="">就业单位</label>
+            <input type="text">
+        </div>
+    </div>
+    <script src="./js/main.js"></script>
+</body>
+</html>

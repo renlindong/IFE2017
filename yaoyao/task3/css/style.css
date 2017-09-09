@@ -1,0 +1,10 @@
+.main{
+    width: 1200px;
+    margin: 100px auto;
+    text-align: center;
+}
+
+
+.hidden{
+    display: none;
+}
