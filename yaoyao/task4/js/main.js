@@ -1,4 +1,5 @@
 'use strict'
+//小方块的默认位置
 var direction = 0
 var zhDirection = '上'
 var topNumber = 150
