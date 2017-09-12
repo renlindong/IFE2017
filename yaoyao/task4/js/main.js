@@ -49,9 +49,6 @@ function changeDirection(ele, deg) {
 }
 
 function move(ele) {
-    var { top: topNumber, left: leftNumber } = ele.style 
-    topNumber = topNumber.slice(0, topNumber.indexOf('p')) / 1
-    leftNumber = leftNumber.slice(0, leftNumber.indexOf('p')) / 1
     switch (zhDirection) {
         case '上':
             if (topNumber === 50) {
