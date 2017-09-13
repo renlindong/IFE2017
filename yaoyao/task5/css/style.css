@@ -20,6 +20,7 @@ td{
     background-color: red;
     border: 1px solid #7C6B6B;
     transition: all 1s;
+    overflow: hidden;
 }
 
 .stock{

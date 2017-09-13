@@ -1,0 +1,45 @@
+table{
+    border-collapse: collapse;
+    text-align: center;
+}
+
+tr{
+    display: flex;
+}
+
+td{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+table .menu{
+    background-color: #1A1616;
+    color: #fff;
+}
+
+.triangle-up{
+    width: 0;
+    height: 0;
+    border-left: 10px solid transparent;
+    border-bottom: 10px solid #fff;
+    border-right: 10px solid transparent;
+}
+
+.triangle-down{
+    width: 0;
+    height: 0;
+    margin-top: 5px;
+    border-top: 10px solid #fff;
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+}
+
+table tr td{
+    width: 100px;
+    height: 60px;
+    border: 1px solid #ccc;
+}
+
+
+

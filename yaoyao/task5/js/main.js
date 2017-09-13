@@ -11,6 +11,11 @@ function init() {
             rob.go(e.target.getAttribute('key'))
         }
     }, false)
+    rob.element.addEventListener('transitionend', function (e) {
+        if (e.propertyName === "transform"){
+            e.target.style.borderRadius = "0"
+          }
+    }, false)
 }
 
 function Robot(x, y) {
@@ -25,11 +30,8 @@ function Robot(x, y) {
         } else {
             this.element.style.transform = `rotate(${this.direction + deg}deg)`
         }
-        if ((this.direction + deg) % 360 === 0) {
-            this.direction = 0
-        } else {
-            this.direction += deg
-        }
+        this.element.style.borderRadius = '50%'
+        this.direction += deg
     }
     this.go = function (action) {
         switch (action) {
@@ -57,6 +59,7 @@ function Robot(x, y) {
                     this.toTop()
                     this.face = 0
                 }
+                console.log(this.direction)
                 break;
             case 'move-left':
                 if (this.face === 3) {
@@ -70,6 +73,7 @@ function Robot(x, y) {
                     this.toLeft()
                     this.face = 3
                 }
+                console.log(this.direction)
                 break;
             case 'move-bottom':
                 if (this.face === 2) {
@@ -83,6 +87,7 @@ function Robot(x, y) {
                     this.toBottom()
                     this.face = 2
                 }
+                console.log(this.direction)
                 break;
             case 'move-right':
                 if (this.face === 1) {
@@ -91,11 +96,15 @@ function Robot(x, y) {
                     if (this.face === 2) {
                         this.changeDirection(-90)
                     } else {
-                        this.changeDirection((1 - this.face) * 90)
+                        this.changeDirection(Math.abs(1 - this.face) * 90)
                     }
-                    this.toRight()
+                    setTimeout(function () {
+                        this.toRight()
+                    }.bind(this), 1000)
+                    //this.toRight()
                     this.face = 1
                 }
+                console.log(this.direction)
                 break;
             default:
                 break;
