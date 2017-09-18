@@ -13,28 +13,26 @@
         .main .section:nth-child(n+1):nth-child(n+2){
             display: none;
         }
-        .section h3, h4{
+        .section{
+            width: 200px;
+            margin: 0 auto;
+        }
+        .section h3{
             text-align: center;
         }
         .section .item{
             height: 60px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
         }
         .section .item .type{
             width: 80px;
-            text-align: right;
-            margin-right: 20px; 
         }
         .section .item input['input']{
             border: 2px solid #ccc;
         }
         .section .result-warpper .result{
-            width: 80%;
+            width: 200px;
             margin: 0 auto;
             height: 200px;
-            background-color: #ccc;
         }
 
         .tab{
@@ -59,7 +57,7 @@
         <div class="section" id="caesar-container">
             <h3>凯撒密码</h3>
             <div class="item">
-                <label class="type">明文: </label>
+                <label class="type">明/密文: </label>
                 <input type="text" id="caesar-text" />
             </div>
             <div class="item">
