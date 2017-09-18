@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .main{
+            width: 90%;
+            margin: 0 auto;
+        }
+        .main .section:nth-child(n+1):nth-child(n+2){
+            display: none;
+        }
+        .section h3, h4{
+            text-align: center;
+        }
+        .section .item{
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .section .item .type{
+            width: 80px;
+            text-align: right;
+            margin-right: 20px; 
+        }
+        .section .item input['input']{
+            border: 2px solid #ccc;
+        }
+        .section .result-warpper .result{
+            width: 80%;
+            margin: 0 auto;
+            height: 200px;
+            background-color: #ccc;
+        }
+
+        .tab{
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            height: 50px;
+            width: 100%;
+            background-color: #ccc;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .tab span{
+            box-sizing: border-box;
+            padding: 0 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="main">
+        <div class="section" id="caesar-container">
+            <h3>凯撒密码</h3>
+            <div class="item">
+                <label class="type">明文: </label>
+                <input type="text" id="caesar-text" />
+            </div>
+            <div class="item">
+                <label class="type">偏移量:</label>
+                <input type="text" id="caesar-key" />
+            </div>
+            <div class="item">
+                <input class="btn" type="button" value="加密" id="en-caesar"/>
+                <input class="btn" type="button" value="解密" id="de-caesar"/>
+            </div>
+            <div class="result-warpper">
+                <h4>结果：</h4>
+                <div class="result" id="caesar-result">
+
+                </div>
+            </div>
+        </div>
+        <div class="section" id="hill-container">
+            <h3>希尔密码</h3>
+            <h3>写不出来，暂时放弃</h3>
+        </div>
+        <div class="section" id="vigenere-container">
+            <h3>维吉尼亚密码</h3>
+            <div class="item">
+                    <label class="type">明/密文: </label>
+                    <input type="text" id="vig-text"/>
+                </div>
+                <div class="item">
+                    <label class="type">key:</label>
+                    <input type="text" id="vig-key"/>
+                </div>
+                <div class="item">
+                    <input class="btn" type="button" value="加密" id="en-vig" />
+                    <input class="btn" type="button" value="解密" id="de-vig" />
+                </div>
+                <div class="result-warpper">
+                    <h4>结果：</h4>
+                    <div class="result" id="vig-result">
+                        
+                    </div>
+                </div>
+        </div>
+        <div class="tab">
+            <span id="caesar">凯撒密码</span>
+            <span id="hill">希尔密码</span>
+            <span id="vigenere">维吉尼亚密码</span>
+        </div>
+    </div>
+    <script type="text/javascript">
+        function init() {
+            /*let doc = document
+            let caesar = doc.getElementById('caesar')
+
+            let caesarText = ''
+            let caesarKey = ''
+            let enCaesar = doc.getElementById('en-')*/
+            let hillInit = false
+            let vigenereInit = false
+
+            let doc = document
+
+            let caesarContainer = doc.getElementById('caesar-container')
+            let hillContainer = doc.getElementById('hill-container')
+            let vigenereContainer = doc.getElementById('vigenere-container')
+
+            let changeToCaesar = doc.getElementById('caesar')
+            let changeToHill = doc.getElementById('hill')
+            let changeToVigenere = doc.getElementById('vigenere')
+
+            changeToCaesar.addEventListener('click', function (e) {
+                caesarContainer.style.display = 'block'
+                hillContainer.style.display = 'none'
+                vigenereContainer.style.display = 'none'
+            }, false)
+
+            changeToHill.addEventListener('click', function (e) {
+                caesarContainer.style.display = 'none'
+                hillContainer.style.display = 'block'
+                vigenereContainer.style.display = 'none'
+                if (!hillInit) {
+                    hillInitEvent()
+                    hillInit = true
+                }
+            }, false)
+            changeToVigenere.addEventListener('click', function (e) {
+                caesarContainer.style.display = 'none'
+                hillContainer.style.display = 'none'
+                vigenereContainer.style.display = 'block'
+                if (!vigenereInit) {
+                    vigenerInitEvent()
+                    vigenereInit = true
+                }
+            }, false)
+            caesarInitEvent()
+        }
+        function caesarInitEvent() {
+            let doc = document
+            let dict = createCaesarDict()
+
+            let text = doc.getElementById('caesar-text')
+            let key = doc.getElementById('caesar-key')
+            let caesarResult = doc.getElementById('caesar-result')
+
+            let enCaesar = doc.getElementById('en-caesar')
+            let deCaesar = doc.getElementById('de-caesar')
+            enCaesar.addEventListener('click', function () {
+                let result = enCaesarArithmetic(text.value.trim().toUpperCase(), parseInt(key.value.trim()), dict)
+                caesarResult.innerText = result.join('')
+            }, false)
+            deCaesar.addEventListener('click', function () {
+                let result = deCaesarArithmetic(text.value.trim().toUpperCase(), parseInt(key.value.trim()), dict)
+                caesarResult.innerText = result.join('')
+            }, false)
+        }
+        function createCaesarDict() {
+            let array = []
+            for (let index = 0; index < 26; index++) {
+                array[index] = String.fromCharCode(index + 65)
+            }
+            return array
+        }
+        function enCaesarArithmetic(text, key, dict) {
+            let array = text.split('').map(function (item) {
+              let index = item.charCodeAt() - 65
+              let times = key % 26
+              if (index + times < 0) {
+                  return dict[dict.length + index + times]
+              } else if (index + times > 25) {
+                  return dict[index + times - dict.length]
+              } else {
+                  return dict[index + times]
+              }
+            })
+            return array
+        }
+        function deCaesarArithmetic(text, key, dict) {
+            let array = text.split('').map(function (item) {
+              let index = item.charCodeAt() - 65
+              let times = key % 26
+              if (index - times < 0) {
+                  return dict[dict.length + index - times]
+              } else if (index - times > 25) {
+                  return dict[index - times - dict.length]
+              } else {
+                  return dict[index - times]
+              }
+            })
+            return array
+        }
+        function hillInitEvent() {
+            
+        }
+        function vigenerInitEvent() {
+            let doc = document
+            let dict = createVigDict()
+
+            let text = doc.getElementById('vig-text')
+            let key = doc.getElementById('vig-key')
+            let vigResult = doc.getElementById('vig-result')
+
+            let enVig = doc.getElementById('en-vig')
+            let deVig = doc.getElementById('de-vig')
+            enVig.addEventListener('click', function () {
+                let result = enVigArithmetic(text.value.trim().toUpperCase().split(''), key.value.trim().toUpperCase().split(''), dict)
+                vigResult.innerText = result.join('')
+            }, false)
+            deVig.addEventListener('click', function () {
+                let result = deVigArithmetic(text.value.trim().toUpperCase().split(''), key.value.trim().toUpperCase().split(''), dict)
+                vigResult.innerText = result.join('')
+            }, false)
+        }
+        function createVigDict() {
+            let array = []
+            for (let outer = 0; outer < 26; outer++) {
+                let tempArray = []
+                for (let inner = 0; inner < 26; inner++) {
+                    if (outer + inner + 65 > 90) {
+                        tempArray[inner] = String.fromCharCode(outer + inner + 65 - 26)
+                    } else {
+                        tempArray[inner] = String.fromCharCode(inner+ outer + 65)
+                    }
+                }
+                array[outer] = tempArray
+            }
+            return array
+        }
+        function enVigArithmetic(text, key, dict) {
+            let array = []
+            for (let outer = 0, inner = 0; outer < text.length; outer++) {
+                array[outer] = dict[key[inner].charCodeAt() - 65][text[outer].charCodeAt() - 65]
+                if (inner === key.length - 1) {
+                    inner = 0
+                } else {
+                    inner ++
+                }
+            }
+            return array
+        }
+        function deVigArithmetic(text, key, dict) {
+            let array = []
+            for (let outer = 0, inner = 0; outer < text.length; outer++) {
+                //array[outer] = dict[key[inner].charCodeAt() - 65][text[outer].charCodeAt() - 65]
+                let pointDict = 25 - 90 + key[inner].charCodeAt()
+                for (var index = 0; index < dict[pointDict].length; index++) {
+                    if (dict[pointDict][index] === text[outer]) {
+                        array.push(String.fromCharCode(index + 65))
+                    }
+                }
+                if (inner === key.length - 1) {
+                    inner = 0
+                } else {
+                    inner ++
+                }
+            }
+            console.log(array)
+            return array
+        }
+        init()
+        
+    </script>
+</body>
+</html>
